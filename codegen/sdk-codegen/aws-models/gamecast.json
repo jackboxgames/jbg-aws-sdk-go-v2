@@ -1,0 +1,4094 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.gamecast#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Detailed error message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "User does not have sufficient access to perform this action.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.gamecast#ActiveCapacity": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "ActiveCapacity is the current number of provisioned stream sessions. During a scaling event, this may be less or more than the DesiredCount.",
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.gamecast#ApplicationResource": {
+            "type": "resource",
+            "identifiers": {
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn"
+                }
+            },
+            "properties": {
+                "Id": {
+                    "target": "com.amazonaws.gamecast#Id"
+                },
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description"
+                },
+                "RuntimeEnvironment": {
+                    "target": "com.amazonaws.gamecast#RuntimeEnvironment"
+                },
+                "ExecutablePath": {
+                    "target": "com.amazonaws.gamecast#ExecutablePath"
+                },
+                "LogLocations": {
+                    "target": "com.amazonaws.gamecast#FilePaths"
+                },
+                "ApplicationSourceUri": {
+                    "target": "com.amazonaws.gamecast#ApplicationSourceUri"
+                },
+                "SaveKey": {
+                    "target": "com.amazonaws.gamecast#SaveKey"
+                },
+                "SaveConfiguration": {
+                    "target": "com.amazonaws.gamecast#SaveConfiguration"
+                },
+                "Status": {
+                    "target": "com.amazonaws.gamecast#ApplicationStatus"
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.gamecast#ApplicationStatusReason"
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp"
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp"
+                },
+                "Tags": {
+                    "target": "com.amazonaws.gamecast#Tags"
+                },
+                "AssociatedStreamGroups": {
+                    "target": "com.amazonaws.gamecast#ArnList"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.gamecast#CreateApplication"
+            },
+            "read": {
+                "target": "com.amazonaws.gamecast#GetApplication"
+            },
+            "update": {
+                "target": "com.amazonaws.gamecast#UpdateApplication"
+            },
+            "delete": {
+                "target": "com.amazonaws.gamecast#DeleteApplication"
+            },
+            "list": {
+                "target": "com.amazonaws.gamecast#ListApplications"
+            },
+            "traits": {
+                "aws.cloudformation#cfnResource": {
+                    "name": "Application"
+                }
+            }
+        },
+        "com.amazonaws.gamecast#ApplicationSourceUri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ApplicationSourceUri points to a S3 Uri to replicate game files from.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.gamecast#ApplicationStatus": {
+            "type": "enum",
+            "members": {
+                "INITIALIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZED"
+                    }
+                },
+                "PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESSING"
+                    }
+                },
+                "READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of valid statuses for Application resource."
+            }
+        },
+        "com.amazonaws.gamecast#ApplicationStatusReason": {
+            "type": "enum",
+            "members": {
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "internalError"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "accessDenied"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Status reason is included when application is ERROR status."
+            }
+        },
+        "com.amazonaws.gamecast#ApplicationSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.gamecast#Id"
+                },
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description"
+                },
+                "Status": {
+                    "target": "com.amazonaws.gamecast#ApplicationStatus"
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The time this resource was created. Timestamps are in ISO8601 format."
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The last time this resource was updated. Timestamps are in ISO8601 format."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A summary view of an application."
+            }
+        },
+        "com.amazonaws.gamecast#ApplicationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.gamecast#ApplicationSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of summary views of all the applications."
+            }
+        },
+        "com.amazonaws.gamecast#Applications": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.gamecast#ApplicationSummaryList"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.gamecast#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ARN of the resource.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:([^:\n]*):([^:\n]*):([^:\n]*):([0-9]{12}):([^:\n]*)$"
+            }
+        },
+        "com.amazonaws.gamecast#ArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.gamecast#Arn"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of Identifier"
+            }
+        },
+        "com.amazonaws.gamecast#AssociateApplications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#AssociateApplicationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#AssociateApplicationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to associate Applications to a StreamGroup",
+                "smithy.api#documentation": "If a customer want to start stream sessions with different applications on the same stream group, he needs to\ncall this API to associate those applications to that stream group beforehand.\nExample CLI input\naws gamecast associate-applications --identifier arn:aws:gamecast:us-west-2:123456789012:streamgroup/33gveJpz0 \\\n    --application-identifiers arn:aws:gamecast:us-west-2:123456789012:application/4VYlL3Me0",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/streamgroups/{Identifier}/associations"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.gamecast#AssociateApplicationsInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Arn"
+                    }
+                },
+                "ApplicationIdentifiers": {
+                    "target": "com.amazonaws.gamecast#Identifiers",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#AssociateApplicationsOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn"
+                },
+                "ApplicationArns": {
+                    "target": "com.amazonaws.gamecast#ArnList"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Idempotency token.",
+                "smithy.api#length": {
+                    "min": 32,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\x21-\\x7E]+$"
+            }
+        },
+        "com.amazonaws.gamecast#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Detailed error message",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Identifier of the resource affected."
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Type of the resource affected."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Updating or deleting a resource can cause an inconsistent state.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.gamecast#ConnectionTimeoutSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "The time that that we wait (in Seconds) for client to connect to the instance (after a stream session is active\nor after disconnection) before closing the session. Default to 120 seconds.",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 300
+                }
+            }
+        },
+        "com.amazonaws.gamecast#CreateApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#CreateApplicationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#CreateApplicationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to create application",
+                "smithy.api#documentation": "Example CLI input\naws gamecast create-application --description \"example game v1\"\n--runtime-environment '{\"Type\":\"WINE-STAGING\", \"Version\":\"20220721\"}'\n--executable-path \"launcher.exe\"\n--application-source-uri \"s3://example-games/example\" --log-locations '[\".\\\\logs\"]'\n--save-key \"example\"\n--save-configuration '{\"FileLocations\": [\"%USERPROFILE%\\\\save\"], \"RegistryLocations\":[\"HKEY_CURRENT_USER\\\\Software\\\\Microsoft\\\\Internet Explorer\\\\Settings\"]}'",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/applications"
+                }
+            }
+        },
+        "com.amazonaws.gamecast#CreateApplicationInput": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuntimeEnvironment": {
+                    "target": "com.amazonaws.gamecast#RuntimeEnvironment",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutablePath": {
+                    "target": "com.amazonaws.gamecast#ExecutablePath",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationSourceUri": {
+                    "target": "com.amazonaws.gamecast#ApplicationSourceUri",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "SaveKey": {
+                    "target": "com.amazonaws.gamecast#SaveKey"
+                },
+                "SaveConfiguration": {
+                    "target": "com.amazonaws.gamecast#SaveConfiguration"
+                },
+                "LogLocations": {
+                    "target": "com.amazonaws.gamecast#FilePaths"
+                },
+                "Tags": {
+                    "target": "com.amazonaws.gamecast#Tags",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "full"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.gamecast#ClientToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#CreateApplicationOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn",
+                    "traits": {
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Arn"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description"
+                },
+                "RuntimeEnvironment": {
+                    "target": "com.amazonaws.gamecast#RuntimeEnvironment",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read"
+                    }
+                },
+                "ExecutablePath": {
+                    "target": "com.amazonaws.gamecast#ExecutablePath"
+                },
+                "LogLocations": {
+                    "target": "com.amazonaws.gamecast#FilePaths"
+                },
+                "ApplicationSourceUri": {
+                    "target": "com.amazonaws.gamecast#ApplicationSourceUri"
+                },
+                "SaveKey": {
+                    "target": "com.amazonaws.gamecast#SaveKey",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read"
+                    }
+                },
+                "SaveConfiguration": {
+                    "target": "com.amazonaws.gamecast#SaveConfiguration"
+                },
+                "Id": {
+                    "target": "com.amazonaws.gamecast#Id",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.gamecast#ApplicationStatus",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.gamecast#ApplicationStatusReason",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "The time this resource was created. Timestamps are in ISO8601 format."
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "The last time this resource was updated. Timestamps are in ISO8601 format."
+                    }
+                },
+                "AssociatedStreamGroups": {
+                    "target": "com.amazonaws.gamecast#ArnList",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Amazon GameCast application resource represents content for streaming, such as a game build or other 3D-rendered software.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#CreateStreamGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#CreateStreamGroupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#CreateStreamGroupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to create a StreamGroup",
+                "smithy.api#documentation": "Example CLI input\naws gamecast create-stream-group\n--description \"example stream group\" --stream-class MINI\n--default-application-identifier arn:aws:gamecast:us-west-2:123456789012:application/YQUgp0iC0",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/streamgroups"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.gamecast#CreateStreamGroupInput": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "StreamClass": {
+                    "target": "com.amazonaws.gamecast#StreamClass",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultApplicationIdentifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.gamecast#Tags",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "full"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.gamecast#ClientToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#CreateStreamGroupOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn",
+                    "traits": {
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Arn"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description"
+                },
+                "DefaultApplication": {
+                    "target": "com.amazonaws.gamecast#DefaultApplication",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read"
+                    }
+                },
+                "DesiredCapacity": {
+                    "target": "com.amazonaws.gamecast#DesiredCapacity"
+                },
+                "StreamClass": {
+                    "target": "com.amazonaws.gamecast#StreamClass",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read"
+                    }
+                },
+                "ActiveCapacity": {
+                    "target": "com.amazonaws.gamecast#ActiveCapacity",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "IdleCapacity": {
+                    "target": "com.amazonaws.gamecast#IdleCapacity",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.gamecast#Id",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.gamecast#StreamGroupStatus",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.gamecast#StreamGroupStatusReason",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "The last time this resource was updated. Timestamps are in ISO8601 format."
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "The time this resource was created. Timestamps are in ISO8601 format."
+                    }
+                },
+                "AssociatedApplications": {
+                    "target": "com.amazonaws.gamecast#ArnList",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Amazon GameCast computing resources that host your streams.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#CreateStreamSessionConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#CreateStreamSessionConnectionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#CreateStreamSessionConnectionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to create a stream session connection",
+                "smithy.api#documentation": "Customer call this API to set up a new stream session connection.\nEnd players can use the signal response in the response to connect to active streams.\nExample CLI input\naws gamecast create-stream-session-connection --identifier arn:aws:gamecast:us-west-2:123456789012:streamgroup/33gveJpz0\n--stream-session-identifier arn:aws:gamecast:us-west-2:123456789012:streamsession/33gveJpz0/1a3uWe5W0\n--signal-request \"webrtc-ice-offer-in-text\"",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/streamgroups/{Identifier}/streamsessions/{StreamSessionIdentifier}/connections"
+                }
+            }
+        },
+        "com.amazonaws.gamecast#CreateStreamSessionConnectionInput": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.gamecast#ClientToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "StreamSessionIdentifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SignalRequest": {
+                    "target": "com.amazonaws.gamecast#SignalRequest",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#CreateStreamSessionConnectionOutput": {
+            "type": "structure",
+            "members": {
+                "SignalResponse": {
+                    "target": "com.amazonaws.gamecast#SignalResponse"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#DefaultApplication": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.gamecast#Id"
+                },
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Information about default application running on the stream group."
+            }
+        },
+        "com.amazonaws.gamecast#DeleteApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#DeleteApplicationInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to delete an application",
+                "smithy.api#documentation": "Example CLI input\naws gamecast delete-application --identifier arn:aws:gamecast:us-west-2:123456789012:application/4VYlL3Me0",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/applications/{Identifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.gamecast#DeleteApplicationInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Arn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#DeleteStreamGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#DeleteStreamGroupInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to delete a StreamGroup",
+                "smithy.api#documentation": "Example CLI input\naws gamecast delete-stream-group --identifier arn:aws:gamecast:us-west-2:123456789012:streamgroup/33gveJpz0",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/streamgroups/{Identifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.gamecast#DeleteStreamGroupInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Arn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#DeleteUserData": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#DeleteUserDataInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to delete game saves",
+                "smithy.api#documentation": "Example CLI input\naws gamecast delete-user-data --save-key Sam-Max --user-id xnshijwh",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/userdata"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.gamecast#DeleteUserDataInput": {
+            "type": "structure",
+            "members": {
+                "UserId": {
+                    "target": "com.amazonaws.gamecast#UserId",
+                    "traits": {
+                        "smithy.api#httpQuery": "UserId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SaveKey": {
+                    "target": "com.amazonaws.gamecast#SaveKey",
+                    "traits": {
+                        "smithy.api#httpQuery": "SaveKey",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#Description": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Descriptive label for the resource, not a unique ID.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_\\s]+$"
+            }
+        },
+        "com.amazonaws.gamecast#DesiredCapacity": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "DesiredCapacity is the target number of stream sessions customer sets.",
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.gamecast#DisassociateApplications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#DisassociateApplicationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#DisassociateApplicationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to disassociate Applications from a StreamGroup",
+                "smithy.api#documentation": "If a customer no longer want to start stream sessions with an applications on a stream group, he needs to\ncall this API to disassociate it from that stream group.\nExample CLI input\naws gamecast disassociate-applications --identifier arn:aws:gamecast:us-west-2:123456789012:streamgroup/33gveJpz0 \\\n    --application-identifiers arn:aws:gamecast:us-west-2:123456789012:application/4VYlL3Me0",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/streamgroups/{Identifier}/disassociations"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.gamecast#DisassociateApplicationsInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Arn"
+                    }
+                },
+                "ApplicationIdentifiers": {
+                    "target": "com.amazonaws.gamecast#Identifiers",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#DisassociateApplicationsOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn"
+                },
+                "ApplicationArns": {
+                    "target": "com.amazonaws.gamecast#ArnList"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#EnvironmentVariables": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 256
+                    },
+                    "smithy.api#pattern": "^[_a-zA-Z][_a-zA-Z0-9]*$"
+                }
+            },
+            "value": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 0,
+                        "max": 1024
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Environment variables to the game runtime environments. For example, session specific user profile or resolution/graphics settings.\nIn theory we support any wine, vulkan, mesa, dxvk, vkd3d environment variables. They are very useful for both\ndebugging and fine-tuning game performance.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.gamecast#ExecutablePath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Executable path is a relative path to the game launcher executable.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.gamecast#FileLocationUri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Save or log file location uri that points to a GameCast owned S3 location that contains the file.\nIf this is null, it means there is no such file for the stream session."
+            }
+        },
+        "com.amazonaws.gamecast#FilePath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.gamecast#FilePaths": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.gamecast#FilePath"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of save file, registry key or log paths that are absolute paths that store game save files when the games\nare running on a Windows environment.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.gamecast#GameCast": {
+            "type": "service",
+            "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.gamecast#AssociateApplications"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#CreateStreamSessionConnection"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#DeleteUserData"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#DisassociateApplications"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#GetStreamSession"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ListStreamSessions"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#StartStreamSession"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#TerminateStreamSession"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#UntagResource"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.gamecast#ApplicationResource"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#StreamGroupResource"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "GameCast",
+                    "cloudFormationName": "GameCast",
+                    "arnNamespace": "gamecast",
+                    "cloudTrailEventSource": "gamecast.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "gamecast"
+                },
+                "aws.iam#supportedPrincipalTypes": [
+                    "Root",
+                    "IAMUser",
+                    "IAMRole",
+                    "FederatedUser"
+                ],
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "Amazon GameCast is a new AWS service that enables customers to build their own game streaming experience.",
+                "smithy.api#title": "AmazonGameCast",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://gamecast-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://gamecast-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://gamecast.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://gamecast.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gamecast.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.gamecast#GameLaunchArgList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#documentation": "Additional CLI arguments passed to the executable when launching the application.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.gamecast#GetApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#GetApplicationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#GetApplicationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to get an application.",
+                "smithy.api#documentation": "Example CLI input\naws gamecast get-application --identifier arn:aws:gamecast:us-west-2:123456789012:application/4VYlL3Me0",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/applications/{Identifier}"
+                },
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "ApplicationReady": {
+                        "documentation": "Waits until an application is ready",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Status",
+                                        "expected": "READY",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Status",
+                                        "expected": "ERROR",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "ApplicationDeleted": {
+                        "documentation": "Waits until an application is deleted",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.gamecast#GetApplicationInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Arn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#GetApplicationOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn",
+                    "traits": {
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Arn"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description"
+                },
+                "RuntimeEnvironment": {
+                    "target": "com.amazonaws.gamecast#RuntimeEnvironment",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read"
+                    }
+                },
+                "ExecutablePath": {
+                    "target": "com.amazonaws.gamecast#ExecutablePath"
+                },
+                "LogLocations": {
+                    "target": "com.amazonaws.gamecast#FilePaths"
+                },
+                "ApplicationSourceUri": {
+                    "target": "com.amazonaws.gamecast#ApplicationSourceUri"
+                },
+                "SaveKey": {
+                    "target": "com.amazonaws.gamecast#SaveKey",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read"
+                    }
+                },
+                "SaveConfiguration": {
+                    "target": "com.amazonaws.gamecast#SaveConfiguration"
+                },
+                "Id": {
+                    "target": "com.amazonaws.gamecast#Id",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.gamecast#ApplicationStatus",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.gamecast#ApplicationStatusReason",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "The time this resource was created. Timestamps are in ISO8601 format."
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "The last time this resource was updated. Timestamps are in ISO8601 format."
+                    }
+                },
+                "AssociatedStreamGroups": {
+                    "target": "com.amazonaws.gamecast#ArnList",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Amazon GameCast application resource represents content for streaming, such as a game build or other 3D-rendered software.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#GetStreamGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#GetStreamGroupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#GetStreamGroupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to get a StreamGroup",
+                "smithy.api#documentation": "Example CLI Input\naws gamecast get-stream-group --identifier arn:aws:gamecast:us-west-2:123456789012:streamgroup/33gveJpz0",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/streamgroups/{Identifier}"
+                },
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "StreamGroupActive": {
+                        "documentation": "Waits until a stream group is active",
+                        "minDelay": 30,
+                        "maxDelay": 3600,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Status",
+                                        "expected": "ACTIVE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Status",
+                                        "expected": "ERROR",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "StreamGroupDeleted": {
+                        "documentation": "Waits until a stream group is deleted",
+                        "minDelay": 30,
+                        "maxDelay": 1800,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            }
+                        ]
+                    },
+                    "StreamCapacityReached": {
+                        "documentation": "Waits until the stream active capacity reaches desired capacity",
+                        "minDelay": 10,
+                        "maxDelay": 600,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ActiveCapacity == DesiredCapacity",
+                                        "expected": "true",
+                                        "comparator": "booleanEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.gamecast#GetStreamGroupInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Arn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#GetStreamGroupOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn",
+                    "traits": {
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Arn"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description"
+                },
+                "DefaultApplication": {
+                    "target": "com.amazonaws.gamecast#DefaultApplication",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read"
+                    }
+                },
+                "DesiredCapacity": {
+                    "target": "com.amazonaws.gamecast#DesiredCapacity"
+                },
+                "StreamClass": {
+                    "target": "com.amazonaws.gamecast#StreamClass",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read"
+                    }
+                },
+                "ActiveCapacity": {
+                    "target": "com.amazonaws.gamecast#ActiveCapacity",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "IdleCapacity": {
+                    "target": "com.amazonaws.gamecast#IdleCapacity",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.gamecast#Id",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.gamecast#StreamGroupStatus",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.gamecast#StreamGroupStatusReason",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "The last time this resource was updated. Timestamps are in ISO8601 format."
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "The time this resource was created. Timestamps are in ISO8601 format."
+                    }
+                },
+                "AssociatedApplications": {
+                    "target": "com.amazonaws.gamecast#ArnList",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Amazon GameCast computing resources that host your streams.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#GetStreamSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#GetStreamSessionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#GetStreamSessionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to get a stream session",
+                "smithy.api#documentation": "Example CLI input\naws gamecast get-stream-session --identifier arn:aws:gamecast:us-west-2:123456789012:streamgroup/33gveJpz0\n--stream-session-identifier arn:aws:gamecast:us-west-2:123456789012:streamsession/33gveJpz0/1a3uWe5W0",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/streamgroups/{Identifier}/streamsessions/{StreamSessionIdentifier}"
+                },
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "StreamSessionActive": {
+                        "documentation": "Waits until a stream session is active",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Status",
+                                        "expected": "ACTIVE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Status",
+                                        "expected": "ERROR",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.gamecast#GetStreamSessionInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "StreamSessionIdentifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#GetStreamSessionOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn"
+                },
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description"
+                },
+                "StreamGroupId": {
+                    "target": "com.amazonaws.gamecast#Id"
+                },
+                "UserId": {
+                    "target": "com.amazonaws.gamecast#UserId"
+                },
+                "Status": {
+                    "target": "com.amazonaws.gamecast#StreamSessionStatus"
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.gamecast#StreamSessionStatusReason"
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.gamecast#Protocol"
+                },
+                "SignalRequest": {
+                    "target": "com.amazonaws.gamecast#SignalRequest"
+                },
+                "SignalResponse": {
+                    "target": "com.amazonaws.gamecast#SignalResponse"
+                },
+                "ConnectionTimeoutSeconds": {
+                    "target": "com.amazonaws.gamecast#ConnectionTimeoutSeconds"
+                },
+                "SessionLengthSeconds": {
+                    "target": "com.amazonaws.gamecast#SessionLengthSeconds"
+                },
+                "AdditionalLaunchArgs": {
+                    "target": "com.amazonaws.gamecast#GameLaunchArgList"
+                },
+                "AdditionalEnvironmentVariables": {
+                    "target": "com.amazonaws.gamecast#EnvironmentVariables"
+                },
+                "SaveFileLocationUri": {
+                    "target": "com.amazonaws.gamecast#FileLocationUri"
+                },
+                "LogFileLocationUri": {
+                    "target": "com.amazonaws.gamecast#FileLocationUri"
+                },
+                "WebSdkProtocolUrl": {
+                    "target": "com.amazonaws.gamecast#WebSdkProtocolUrl"
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The last time this resource was updated. Timestamps are in ISO8601 format."
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The last time this resource was updated. Timestamps are in ISO8601 format."
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.gamecast#Arn"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "GameCast StreamSession provides connection information that clients can use to access the stream.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#Id": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "GameCast resource ID, base62 encoded.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.gamecast#Identifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "An identifier can be either the resource ID or the ARN associated with the main resource in the API.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(^[a-zA-Z0-9-]+$)|(^arn:([^:\n]*):([^:\n]*):([^:\n]*):([0-9]{12}):([^:\n]*)$)$"
+            }
+        },
+        "com.amazonaws.gamecast#Identifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.gamecast#Identifier"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of Identifier",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.gamecast#IdleCapacity": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "IdleCapacity is the current number of provisioned stream sessions are that not running streams.",
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.gamecast#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Detailed error message",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "Advice to clients on when the call can be safely retried.",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Unexpected error during processing of request. It should be retried.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.gamecast#ListApplications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#ListApplicationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#Applications"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to list applications",
+                "smithy.api#documentation": "Example CLI input\naws gamecast list-applications --next-token sample-token --max-results 10",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/applications"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.gamecast#ListApplicationsInput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.gamecast#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.gamecast#MaxResults",
+                    "traits": {
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#ListStreamGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#ListStreamGroupsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#StreamGroups"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to list StreamGroups",
+                "smithy.api#documentation": "aws gamecast list-stream-groups",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/streamgroups"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.gamecast#ListStreamGroupsInput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.gamecast#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.gamecast#MaxResults",
+                    "traits": {
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#ListStreamSessions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#ListStreamSessionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#StreamSessions"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to list stream sessions",
+                "smithy.api#documentation": "Example CLI input\naws gamecast list-stream-sessions --identifier arn:aws:gamecast:us-west-2:123456789012:streamgroup/33gveJpz0 --next-token sample-token --max-results 25",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/streamgroups/{Identifier}/streamsessions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.gamecast#ListStreamSessionsInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.gamecast#StreamSessionStatus",
+                    "traits": {
+                        "smithy.api#httpQuery": "Status"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.gamecast#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.gamecast#MaxResults",
+                    "traits": {
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Example CLI input\naws gamecast list-tags-for-resources --resource-arn arn:aws:gamecast:us-west-2:123456789012:streamgroup/33gveJpz0",
+                "smithy.api#http": {
+                    "uri": "/tags/{ResourceArn}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.gamecast#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.gamecast#Arn",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.gamecast#Tags"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Pagination Limit. Maximum limit is 100. Default value is 25",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.gamecast#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Pagination token"
+            }
+        },
+        "com.amazonaws.gamecast#Protocol": {
+            "type": "enum",
+            "members": {
+                "WEBRTC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WebRTC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The streaming protocol. Only WebRTC for now."
+            }
+        },
+        "com.amazonaws.gamecast#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Detailed error message",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Hypothetical identifier of the resource affected."
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Hypothetical type of the resource affected."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request references a resource which does not exist.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.gamecast#RuntimeEnvironment": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.gamecast#RuntimeEnvironmentType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.gamecast#RuntimeEnvironmentVersion",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Runtime environment is a combination of Windows compatibility layer and other graphics libraries used to run the application."
+            }
+        },
+        "com.amazonaws.gamecast#RuntimeEnvironmentType": {
+            "type": "enum",
+            "members": {
+                "WINE_STAGING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINE-STAGING"
+                    }
+                },
+                "PROTON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROTON"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Type of the runtime environment used to run games."
+            }
+        },
+        "com.amazonaws.gamecast#RuntimeEnvironmentVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Versioned container environment used to run customer game. Each runtime fixed version of the Windows\ncompatibility layer to provide a stable game performance.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.gamecast#SaveConfiguration": {
+            "type": "structure",
+            "members": {
+                "RegistryLocations": {
+                    "target": "com.amazonaws.gamecast#FilePaths"
+                },
+                "FileLocations": {
+                    "target": "com.amazonaws.gamecast#FilePaths"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Application save configuration"
+            }
+        },
+        "com.amazonaws.gamecast#SaveKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "SaveKey is used as key to manage save files, meaning that different applications with the\nsame SaveKey can share game save files generated by the game itself.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.gamecast#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Detailed error message",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Identifier of the resource affected."
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Type of the resource affected."
+                    }
+                },
+                "serviceCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Service Quotas requirement to identify originating service."
+                    }
+                },
+                "quotaCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Service Quotas requirement to identify originating quota."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request would cause a service quota to be exceeded.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.gamecast#SessionLengthSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "The time the stream session will shutdown regardless of the player connection state. Default to 43200.",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 86400
+                }
+            }
+        },
+        "com.amazonaws.gamecast#SignalRequest": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "WebRTC Ice Offer",
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.gamecast#SignalResponse": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "WebRTC ICE answer"
+            }
+        },
+        "com.amazonaws.gamecast#StartStreamSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#StartStreamSessionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#StartStreamSessionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to create a stream session",
+                "smithy.api#documentation": "Example CLI input\naws gamecast start-stream-session --description QA-stream --stream-group-id arn:aws:gamecast:us-west-2:123456789012:streamgroup/33gveJpz0\n--protocol WebRTC --signal-request \"webrtc-ice-offer-in-text\" --user-id xnshijwh --connection-timeout-seconds 300\n--session-length-seconds 7200 --additional-launch-args '[\"-dx11\",\"-fullscreen\"]' --additional-environment-variables '{\"DXVK_HUD\": \"full\"}'",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/streamgroups/{Identifier}/streamsessions"
+                }
+            }
+        },
+        "com.amazonaws.gamecast#StartStreamSessionInput": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.gamecast#ClientToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description"
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.gamecast#Protocol",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "SignalRequest": {
+                    "target": "com.amazonaws.gamecast#SignalRequest",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.gamecast#UserId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionTimeoutSeconds": {
+                    "target": "com.amazonaws.gamecast#ConnectionTimeoutSeconds"
+                },
+                "SessionLengthSeconds": {
+                    "target": "com.amazonaws.gamecast#SessionLengthSeconds"
+                },
+                "AdditionalLaunchArgs": {
+                    "target": "com.amazonaws.gamecast#GameLaunchArgList"
+                },
+                "AdditionalEnvironmentVariables": {
+                    "target": "com.amazonaws.gamecast#EnvironmentVariables"
+                },
+                "ApplicationIdentifier": {
+                    "target": "com.amazonaws.gamecast#Identifier"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#StartStreamSessionOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn"
+                },
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description"
+                },
+                "StreamGroupId": {
+                    "target": "com.amazonaws.gamecast#Id"
+                },
+                "UserId": {
+                    "target": "com.amazonaws.gamecast#UserId"
+                },
+                "Status": {
+                    "target": "com.amazonaws.gamecast#StreamSessionStatus"
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.gamecast#StreamSessionStatusReason"
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.gamecast#Protocol"
+                },
+                "SignalRequest": {
+                    "target": "com.amazonaws.gamecast#SignalRequest"
+                },
+                "SignalResponse": {
+                    "target": "com.amazonaws.gamecast#SignalResponse"
+                },
+                "ConnectionTimeoutSeconds": {
+                    "target": "com.amazonaws.gamecast#ConnectionTimeoutSeconds"
+                },
+                "SessionLengthSeconds": {
+                    "target": "com.amazonaws.gamecast#SessionLengthSeconds"
+                },
+                "AdditionalLaunchArgs": {
+                    "target": "com.amazonaws.gamecast#GameLaunchArgList"
+                },
+                "AdditionalEnvironmentVariables": {
+                    "target": "com.amazonaws.gamecast#EnvironmentVariables"
+                },
+                "SaveFileLocationUri": {
+                    "target": "com.amazonaws.gamecast#FileLocationUri"
+                },
+                "LogFileLocationUri": {
+                    "target": "com.amazonaws.gamecast#FileLocationUri"
+                },
+                "WebSdkProtocolUrl": {
+                    "target": "com.amazonaws.gamecast#WebSdkProtocolUrl"
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The last time this resource was updated. Timestamps are in ISO8601 format."
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The last time this resource was updated. Timestamps are in ISO8601 format."
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.gamecast#Arn"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "GameCast StreamSession provides connection information that clients can use to access the stream.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#StreamClass": {
+            "type": "enum",
+            "members": {
+                "gen4a_high": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gen4a_high"
+                    }
+                },
+                "gen4a_ultra": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gen4a_ultra"
+                    }
+                },
+                "gen4n_high": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gen4n_high"
+                    }
+                },
+                "gen4n_ultra": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gen4n_ultra"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "These are pre-packed virtual instance type used to run customer games where mini spec maps to high-end\nintegrated graphics and ultra maps to high-end gaming pc. These have different cost implications."
+            }
+        },
+        "com.amazonaws.gamecast#StreamGroupResource": {
+            "type": "resource",
+            "identifiers": {
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn"
+                }
+            },
+            "properties": {
+                "Id": {
+                    "target": "com.amazonaws.gamecast#Id"
+                },
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description"
+                },
+                "DefaultApplication": {
+                    "target": "com.amazonaws.gamecast#DefaultApplication"
+                },
+                "StreamClass": {
+                    "target": "com.amazonaws.gamecast#StreamClass"
+                },
+                "ActiveCapacity": {
+                    "target": "com.amazonaws.gamecast#ActiveCapacity"
+                },
+                "DesiredCapacity": {
+                    "target": "com.amazonaws.gamecast#DesiredCapacity"
+                },
+                "IdleCapacity": {
+                    "target": "com.amazonaws.gamecast#IdleCapacity"
+                },
+                "Status": {
+                    "target": "com.amazonaws.gamecast#StreamGroupStatus"
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.gamecast#StreamGroupStatusReason"
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp"
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp"
+                },
+                "Tags": {
+                    "target": "com.amazonaws.gamecast#Tags"
+                },
+                "AssociatedApplications": {
+                    "target": "com.amazonaws.gamecast#ArnList"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.gamecast#CreateStreamGroup"
+            },
+            "read": {
+                "target": "com.amazonaws.gamecast#GetStreamGroup"
+            },
+            "update": {
+                "target": "com.amazonaws.gamecast#UpdateStreamGroup"
+            },
+            "delete": {
+                "target": "com.amazonaws.gamecast#DeleteStreamGroup"
+            },
+            "list": {
+                "target": "com.amazonaws.gamecast#ListStreamGroups"
+            },
+            "traits": {
+                "aws.cloudformation#cfnResource": {
+                    "name": "StreamGroup"
+                }
+            }
+        },
+        "com.amazonaws.gamecast#StreamGroupStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of valid statuses for Stream Group resource."
+            }
+        },
+        "com.amazonaws.gamecast#StreamGroupStatusReason": {
+            "type": "enum",
+            "members": {
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "internalError"
+                    }
+                },
+                "NO_AVAILABLE_INSTANCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "noAvailableInstances"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Status reason is included when stream group is ERROR status."
+            }
+        },
+        "com.amazonaws.gamecast#StreamGroupSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn",
+                    "traits": {
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Arn"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.gamecast#Id"
+                },
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description"
+                },
+                "DefaultApplication": {
+                    "target": "com.amazonaws.gamecast#DefaultApplication"
+                },
+                "StreamClass": {
+                    "target": "com.amazonaws.gamecast#StreamClass"
+                },
+                "Status": {
+                    "target": "com.amazonaws.gamecast#StreamGroupStatus"
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The time this resource was created. Timestamps are in ISO8601 format."
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The last time this resource was updated. Timestamps are in ISO8601 format."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A summary view of a stream group."
+            }
+        },
+        "com.amazonaws.gamecast#StreamGroupSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.gamecast#StreamGroupSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "A summary view of all the applications owned by the calling AWS account."
+            }
+        },
+        "com.amazonaws.gamecast#StreamGroups": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.gamecast#StreamGroupSummaryList"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.gamecast#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#StreamSessionStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "CONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTED"
+                    }
+                },
+                "PENDING_CLIENT_RECONNECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_CLIENT_RECONNECTION"
+                    }
+                },
+                "RECONNECTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECONNECTING"
+                    }
+                },
+                "TERMINATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATING"
+                    }
+                },
+                "TERMINATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATED"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of valid statuses for Stream Session."
+            }
+        },
+        "com.amazonaws.gamecast#StreamSessionStatusReason": {
+            "type": "enum",
+            "members": {
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "internalError"
+                    }
+                },
+                "INVALID_SIGNAL_REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "invalidSignalRequest"
+                    }
+                },
+                "PLACEMENT_TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "placementTimeout"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Status reason is included when stream group is ERROR status."
+            }
+        },
+        "com.amazonaws.gamecast#StreamSessionSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn"
+                },
+                "UserId": {
+                    "target": "com.amazonaws.gamecast#UserId"
+                },
+                "StreamGroupId": {
+                    "target": "com.amazonaws.gamecast#Id"
+                },
+                "Status": {
+                    "target": "com.amazonaws.gamecast#StreamSessionStatus"
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.gamecast#Protocol"
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The last time this resource was updated. Timestamps are in ISO8601 format."
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The time this resource was created. Timestamps are in ISO8601 format."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A summary view of stream session."
+            }
+        },
+        "com.amazonaws.gamecast#StreamSessionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.gamecast#StreamSessionSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of summary views of stream sessions for a stream group."
+            }
+        },
+        "com.amazonaws.gamecast#StreamSessions": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.gamecast#StreamSessionSummaryList"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.gamecast#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A single tag key",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.gamecast#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.gamecast#TagKey"
+            },
+            "traits": {
+                "smithy.api#documentation": "Tag keys to remove. The maximum number of keys is 50.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.gamecast#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Example CLI input\naws gamecast tag-resource --resource-arn arn:aws:gamecast:us-west-2:123456789012:streamgroup/33gveJpz0 --tags '[{\"Key\":\"key1\",\"Value\":\"value1\"}]'",
+                "smithy.api#http": {
+                    "uri": "/tags/{ResourceArn}",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.gamecast#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.gamecast#Arn",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.gamecast#Tags",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A single tag value",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.gamecast#Tags": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.gamecast#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.gamecast#TagValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "Common AWS tags for supporting resource tagging and tag-based resource authorization. The maximum number of tags is 50.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.gamecast#TerminateStreamSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#TerminateStreamSessionInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to terminate a stream session",
+                "smithy.api#documentation": "Customer call this API to terminate a stream session.\nExample CLI input\naws gamecast terminate-stream-session --identifier arn:aws:gamecast:us-west-2:123456789012:streamgroup/33gveJpz0\n--stream-session-identifier arn:aws:gamecast:us-west-2:123456789012:streamsession/33gveJpz0/1a3uWe5W0",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/streamgroups/{Identifier}/streamsessions/{StreamSessionIdentifier}"
+                }
+            }
+        },
+        "com.amazonaws.gamecast#TerminateStreamSessionInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "StreamSessionIdentifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Detailed error message",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Service Quotas requirement to identify originating service."
+                    }
+                },
+                "quotaCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Service Quotas requirement to identify originating quota."
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "Advice to clients on when the call can be safely retried.",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request was denied due to request throttling. It should be retried.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.gamecast#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Example CLI input\naws gamecast untag-resource --resource-arn arn:aws:gamecast:us-west-2:123456789012:streamgroup/33gveJpz0 --tags '[\"key1\"]'",
+                "smithy.api#http": {
+                    "uri": "/tags/{ResourceArn}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.gamecast#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.gamecast#Arn",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.gamecast#TagKeyList",
+                    "traits": {
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#UpdateApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#UpdateApplicationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#UpdateApplicationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to update an application",
+                "smithy.api#documentation": "Example CLI input\naws gamecast update-application --identifier arn:aws:gamecast:us-west-2:123456789012:application/4VYlL3Me0 --description \"New description\"",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/applications/{Identifier}"
+                }
+            }
+        },
+        "com.amazonaws.gamecast#UpdateApplicationInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Arn"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description"
+                },
+                "ExecutablePath": {
+                    "target": "com.amazonaws.gamecast#ExecutablePath"
+                },
+                "LogLocations": {
+                    "target": "com.amazonaws.gamecast#FilePaths"
+                },
+                "SaveConfiguration": {
+                    "target": "com.amazonaws.gamecast#SaveConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#UpdateApplicationOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn",
+                    "traits": {
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Arn"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description"
+                },
+                "RuntimeEnvironment": {
+                    "target": "com.amazonaws.gamecast#RuntimeEnvironment",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read"
+                    }
+                },
+                "ExecutablePath": {
+                    "target": "com.amazonaws.gamecast#ExecutablePath"
+                },
+                "LogLocations": {
+                    "target": "com.amazonaws.gamecast#FilePaths"
+                },
+                "ApplicationSourceUri": {
+                    "target": "com.amazonaws.gamecast#ApplicationSourceUri"
+                },
+                "SaveKey": {
+                    "target": "com.amazonaws.gamecast#SaveKey",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read"
+                    }
+                },
+                "SaveConfiguration": {
+                    "target": "com.amazonaws.gamecast#SaveConfiguration"
+                },
+                "Id": {
+                    "target": "com.amazonaws.gamecast#Id",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.gamecast#ApplicationStatus",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.gamecast#ApplicationStatusReason",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "The time this resource was created. Timestamps are in ISO8601 format."
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "The last time this resource was updated. Timestamps are in ISO8601 format."
+                    }
+                },
+                "AssociatedStreamGroups": {
+                    "target": "com.amazonaws.gamecast#ArnList",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Amazon GameCast application resource represents content for streaming, such as a game build or other 3D-rendered software.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#UpdateStreamGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.gamecast#UpdateStreamGroupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.gamecast#UpdateStreamGroupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.gamecast#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.gamecast#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to update a StreamGroup",
+                "smithy.api#documentation": "Example CLI Input\naws gamecast update-stream-group --identifier arn:aws:gamecast:us-west-2:123456789012:streamgroup/33gveJpz0 --default-application-identifier arn:aws:gamecast:us-west-2:123456789012:application/4VYlL3Me0 --desired-capacity 80",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/streamgroups/{Identifier}"
+                }
+            }
+        },
+        "com.amazonaws.gamecast#UpdateStreamGroupInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.gamecast#Identifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Arn"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description"
+                },
+                "DesiredCapacity": {
+                    "target": "com.amazonaws.gamecast#DesiredCapacity"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.gamecast#UpdateStreamGroupOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.gamecast#Arn",
+                    "traits": {
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Arn"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.gamecast#Description"
+                },
+                "DefaultApplication": {
+                    "target": "com.amazonaws.gamecast#DefaultApplication",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read"
+                    }
+                },
+                "DesiredCapacity": {
+                    "target": "com.amazonaws.gamecast#DesiredCapacity"
+                },
+                "StreamClass": {
+                    "target": "com.amazonaws.gamecast#StreamClass",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read"
+                    }
+                },
+                "ActiveCapacity": {
+                    "target": "com.amazonaws.gamecast#ActiveCapacity",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "IdleCapacity": {
+                    "target": "com.amazonaws.gamecast#IdleCapacity",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.gamecast#Id",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.gamecast#StreamGroupStatus",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.gamecast#StreamGroupStatusReason",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {}
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "The last time this resource was updated. Timestamps are in ISO8601 format."
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "The time this resource was created. Timestamps are in ISO8601 format."
+                    }
+                },
+                "AssociatedApplications": {
+                    "target": "com.amazonaws.gamecast#ArnList",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Amazon GameCast computing resources that host your streams.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.gamecast#UserId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Opaque unique user ID to maintain game saved data.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.gamecast#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.gamecast#ValidationExceptionReason"
+                },
+                "fieldList": {
+                    "target": "com.amazonaws.gamecast#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "Reason the request failed validation.\nThe field that caused the error, if applicable. If more than one field caused the error, pick one and elaborate in the message."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The input fails to satisfy the constraints specified by an AWS service.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.gamecast#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Name of the field that caused the Validation Exception.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Detailed error message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Stores information about a field passed inside a request that resulted in an exception."
+            }
+        },
+        "com.amazonaws.gamecast#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.gamecast#ValidationExceptionField"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of fields."
+            }
+        },
+        "com.amazonaws.gamecast#ValidationExceptionReason": {
+            "type": "enum",
+            "members": {
+                "UNKNOWN_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknownOperation"
+                    }
+                },
+                "CANNOT_PARSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cannotParse"
+                    }
+                },
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fieldValidationFailed"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "other"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of reasons for ValidationException"
+            }
+        },
+        "com.amazonaws.gamecast#WebSdkProtocolUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The URL to download the most up-to-date GameCast web SDK protocol file."
+            }
+        }
+    }
+}
