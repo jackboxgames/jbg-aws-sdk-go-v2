@@ -1,0 +1,8 @@
+{
+    "id": "95a4e0dd-7f6f-49b1-962a-b58aac276c01",
+    "type": "feature",
+    "description": "Updates service API and documentation",
+    "modules": [
+        "service/gamecast"
+    ]
+}
