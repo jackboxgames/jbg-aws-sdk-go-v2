@@ -3954,6 +3954,19 @@ type DirectDeploySettings struct {
 	noSmithyDocumentSerde
 }
 
+// A collection of settings that configure the domain's Docker interaction.
+type DockerSettings struct {
+
+	// Indicates whether the domain can access Docker.
+	EnableDockerAccess FeatureStatus
+
+	// The list of Amazon Web Services accounts that are trusted when the domain is
+	// created in VPC-only mode.
+	VpcOnlyTrustedAccounts []string
+
+	noSmithyDocumentSerde
+}
+
 // The domain's details.
 type DomainDetails struct {
 
@@ -3985,6 +3998,9 @@ type DomainDetails struct {
 // specified through the CreateDomain API call.
 type DomainSettings struct {
 
+	// A collection of settings that configure the domain's Docker interaction.
+	DockerSettings *DockerSettings
+
 	// The configuration for attaching a SageMaker user profile name to the execution
 	// role as a sts:SourceIdentity key (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html)
 	// .
@@ -4002,6 +4018,9 @@ type DomainSettings struct {
 
 // A collection of Domain configuration settings to update.
 type DomainSettingsForUpdate struct {
+
+	// A collection of settings that configure the domain's Docker interaction.
+	DockerSettings *DockerSettings
 
 	// The configuration for attaching a SageMaker user profile name to the execution
 	// role as a sts:SourceIdentity key (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html)
@@ -12902,6 +12921,32 @@ type RegisterModelStepMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for remote debugging for the CreateTrainingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
+// API. To learn more about the remote debugging functionality of SageMaker, see
+// Access a training container through Amazon Web Services Systems Manager (SSM)
+// for remote debugging (https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html)
+// .
+type RemoteDebugConfig struct {
+
+	// If set to True, enables remote debugging.
+	EnableRemoteDebug *bool
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for remote debugging for the UpdateTrainingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateTrainingJob.html)
+// API. To learn more about the remote debugging functionality of SageMaker, see
+// Access a training container through Amazon Web Services Systems Manager (SSM)
+// for remote debugging (https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html)
+// .
+type RemoteDebugConfigForUpdate struct {
+
+	// If set to True, enables remote debugging.
+	EnableRemoteDebug *bool
+
+	noSmithyDocumentSerde
+}
+
 // Contains input values for a task.
 type RenderableTask struct {
 
@@ -13662,7 +13707,6 @@ type SecondaryStatusTransition struct {
 	//   - Launched instance was unhealthy, replacing it!
 	//   - Preparing the instances for training.
 	// Training
-	//   - Downloading the training image.
 	//   - Training image download completed. Training in progress.
 	// Status messages are subject to change. Therefore, we recommend not including
 	// them in code that programmatically initiates actions. For examples, don't use
@@ -14435,6 +14479,92 @@ type TextGenerationResolvedAttributes struct {
 
 	// The name of the base model to fine-tune.
 	BaseModelName *string
+
+	noSmithyDocumentSerde
+}
+
+// Used to set feature group throughput configuration. There are two modes:
+// ON_DEMAND and PROVISIONED . With on-demand mode, you are charged for data reads
+// and writes that your application performs on your feature group. You do not need
+// to specify read and write throughput because Feature Store accommodates your
+// workloads as they ramp up and down. You can switch a feature group to on-demand
+// only once in a 24 hour period. With provisioned throughput mode, you specify the
+// read and write capacity per second that you expect your application to require,
+// and you are billed based on those limits. Exceeding provisioned throughput will
+// result in your requests being throttled. Note: PROVISIONED throughput mode is
+// supported only for feature groups that are offline-only, or use the Standard (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType)
+// tier online store.
+type ThroughputConfig struct {
+
+	// The mode used for your feature group throughput: ON_DEMAND or PROVISIONED .
+	//
+	// This member is required.
+	ThroughputMode ThroughputMode
+
+	// For provisioned feature groups with online store enabled, this indicates the
+	// read throughput you are billed for and can consume without throttling. This
+	// field is not applicable for on-demand feature groups.
+	ProvisionedReadCapacityUnits *int32
+
+	// For provisioned feature groups, this indicates the write throughput you are
+	// billed for and can consume without throttling. This field is not applicable for
+	// on-demand feature groups.
+	ProvisionedWriteCapacityUnits *int32
+
+	noSmithyDocumentSerde
+}
+
+// Active throughput configuration of the feature group. Used to set feature group
+// throughput configuration. There are two modes: ON_DEMAND and PROVISIONED . With
+// on-demand mode, you are charged for data reads and writes that your application
+// performs on your feature group. You do not need to specify read and write
+// throughput because Feature Store accommodates your workloads as they ramp up and
+// down. You can switch a feature group to on-demand only once in a 24 hour period.
+// With provisioned throughput mode, you specify the read and write capacity per
+// second that you expect your application to require, and you are billed based on
+// those limits. Exceeding provisioned throughput will result in your requests
+// being throttled. Note: PROVISIONED throughput mode is supported only for
+// feature groups that are offline-only, or use the Standard (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType)
+// tier online store.
+type ThroughputConfigDescription struct {
+
+	// The mode used for your feature group throughput: ON_DEMAND or PROVISIONED .
+	//
+	// This member is required.
+	ThroughputMode ThroughputMode
+
+	// For provisioned feature groups with online store enabled, this indicates the
+	// read throughput you are billed for and can consume without throttling. This
+	// field is not applicable for on-demand feature groups.
+	ProvisionedReadCapacityUnits *int32
+
+	// For provisioned feature groups, this indicates the write throughput you are
+	// billed for and can consume without throttling. This field is not applicable for
+	// on-demand feature groups.
+	ProvisionedWriteCapacityUnits *int32
+
+	noSmithyDocumentSerde
+}
+
+// The new throughput configuration for the feature group. You can switch between
+// on-demand and provisioned modes or update the read / write capacity of
+// provisioned feature groups. You can switch a feature group to on-demand only
+// once in a 24 hour period.
+type ThroughputConfigUpdate struct {
+
+	// For provisioned feature groups with online store enabled, this indicates the
+	// read throughput you are billed for and can consume without throttling.
+	ProvisionedReadCapacityUnits *int32
+
+	// For provisioned feature groups, this indicates the write throughput you are
+	// billed for and can consume without throttling.
+	ProvisionedWriteCapacityUnits *int32
+
+	// Target throughput mode of the feature group. Throughput update is an
+	// asynchronous operation, and the outcome should be monitored by polling
+	// LastUpdateStatus field in DescribeFeatureGroup response. You cannot update a
+	// feature group's throughput while another update is in progress.
+	ThroughputMode ThroughputMode
 
 	noSmithyDocumentSerde
 }
@@ -16089,6 +16219,19 @@ type Vertex struct {
 	// The type of the lineage entity resource. For example: DataSet , Model , Endpoint
 	// , etc...
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// The list of key-value pairs that you specify for your resources.
+type VisibilityConditions struct {
+
+	// The key for that specifies the tag that you're using to filter the search
+	// results. The key must start with Tags. .
+	Key *string
+
+	// The value for the tag that you're using to filter the search results.
+	Value *string
 
 	noSmithyDocumentSerde
 }

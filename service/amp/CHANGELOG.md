@@ -1,3 +1,11 @@
+# v1.22.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.0 (2023-12-21)
+
+* **Feature**: This release updates Amazon Managed Service for Prometheus APIs to support customer managed KMS keys.
+
 # v1.21.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

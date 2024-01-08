@@ -1,3 +1,11 @@
+# v1.28.2 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.28.1 (2023-12-27)
+
+* No change notes available for this release.
+
 # v1.28.0 (2023-12-11)
 
 * **Feature**: This release adds a new parameter configuration setting to the Neptune cluster related APIs that can be leveraged to switch between the underlying supported storage modes.

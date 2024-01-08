@@ -44968,6 +44968,51 @@ func awsAwsjson11_deserializeDocumentDirectDeploySettings(v **types.DirectDeploy
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDockerSettings(v **types.DockerSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DockerSettings
+	if *v == nil {
+		sv = &types.DockerSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EnableDockerAccess":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FeatureStatus to be of type string, got %T instead", value)
+				}
+				sv.EnableDockerAccess = types.FeatureStatus(jtv)
+			}
+
+		case "VpcOnlyTrustedAccounts":
+			if err := awsAwsjson11_deserializeDocumentVpcOnlyTrustedAccounts(&sv.VpcOnlyTrustedAccounts, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDomainDetails(v **types.DomainDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45168,6 +45213,11 @@ func awsAwsjson11_deserializeDocumentDomainSettings(v **types.DomainSettings, va
 
 	for key, value := range shape {
 		switch key {
+		case "DockerSettings":
+			if err := awsAwsjson11_deserializeDocumentDockerSettings(&sv.DockerSettings, value); err != nil {
+				return err
+			}
+
 		case "ExecutionRoleIdentityConfig":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -69786,6 +69836,46 @@ func awsAwsjson11_deserializeDocumentRegisterModelStepMetadata(v **types.Registe
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRemoteDebugConfig(v **types.RemoteDebugConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RemoteDebugConfig
+	if *v == nil {
+		sv = &types.RemoteDebugConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EnableRemoteDebug":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableRemoteDebug to be of type *bool, got %T instead", value)
+				}
+				sv.EnableRemoteDebug = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentRenderingError(v **types.RenderingError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -73689,6 +73779,72 @@ func awsAwsjson11_deserializeDocumentTextGenerationResolvedAttributes(v **types.
 					return fmt.Errorf("expected BaseModelName to be of type string, got %T instead", value)
 				}
 				sv.BaseModelName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentThroughputConfigDescription(v **types.ThroughputConfigDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ThroughputConfigDescription
+	if *v == nil {
+		sv = &types.ThroughputConfigDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ProvisionedReadCapacityUnits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected CapacityUnit to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ProvisionedReadCapacityUnits = ptr.Int32(int32(i64))
+			}
+
+		case "ProvisionedWriteCapacityUnits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected CapacityUnit to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ProvisionedWriteCapacityUnits = ptr.Int32(int32(i64))
+			}
+
+		case "ThroughputMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ThroughputMode to be of type string, got %T instead", value)
+				}
+				sv.ThroughputMode = types.ThroughputMode(jtv)
 			}
 
 		default:
@@ -78169,6 +78325,42 @@ func awsAwsjson11_deserializeDocumentVpcConfig(v **types.VpcConfig, value interf
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentVpcOnlyTrustedAccounts(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -84755,6 +84947,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeFeatureGroupOutput(v **DescribeFe
 				sv.RoleArn = ptr.String(jtv)
 			}
 
+		case "ThroughputConfig":
+			if err := awsAwsjson11_deserializeDocumentThroughputConfigDescription(&sv.ThroughputConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -89286,6 +89483,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeTrainingJobOutput(v **DescribeTra
 					return fmt.Errorf("expected ProfilingStatus to be of type string, got %T instead", value)
 				}
 				sv.ProfilingStatus = types.ProfilingStatus(jtv)
+			}
+
+		case "RemoteDebugConfig":
+			if err := awsAwsjson11_deserializeDocumentRemoteDebugConfig(&sv.RemoteDebugConfig, value); err != nil {
+				return err
 			}
 
 		case "ResourceConfig":

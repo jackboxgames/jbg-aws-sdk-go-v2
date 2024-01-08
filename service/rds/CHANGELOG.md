@@ -1,3 +1,15 @@
+# v1.66.2 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.66.1 (2023-12-27)
+
+* No change notes available for this release.
+
+# v1.66.0 (2023-12-21)
+
+* **Feature**: This release adds support for using RDS Data API with Aurora PostgreSQL Serverless v2 and provisioned DB clusters.
+
 # v1.65.0 (2023-12-19)
 
 * **Feature**: RDS - The release adds two new APIs: DescribeDBRecommendations and ModifyDBRecommendation

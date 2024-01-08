@@ -1,3 +1,11 @@
+# v1.34.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.34.0 (2023-12-29)
+
+* **Feature**: This release introduces a new parameter to bypasses an API key's expiry conditions and delete the key.
+
 # v1.33.0 (2023-12-12)
 
 * **Feature**: This release 1)  adds sub-municipality field in Places API for searching and getting places information, and 2) allows optimizing route calculation based on expected arrival time.
